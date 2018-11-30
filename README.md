@@ -7,7 +7,7 @@ AWS CodePipeline does not currently support catching arbitrary source branches; 
 ## Diagram
 
 <p align="center">
-  <img src="./assets/diagram.png"/>
+  <img src="https://raw.githubusercontent.com/pbar1/terraform-aws-codepipeline-multiplexer/master/assets/diagram.png"/>
 </p>
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
