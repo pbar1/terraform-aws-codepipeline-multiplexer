@@ -112,8 +112,8 @@ resource "aws_lambda_function" "lambda" {
   handler          = "lambda_handler"
   function_name    = "Handler"
   role             = "${aws_iam_role.lambda.arn}"
-  memory_size      = 256
-  timeout          = 300
+  memory_size      = "${var.lambda_memory}"
+  timeout          = "${var.lambda_timeout}"
   runtime          = "go1.x"
 
   environment {
@@ -125,7 +125,7 @@ resource "aws_lambda_function" "lambda" {
 }
 
 resource "aws_iam_role" "lambda" {
-  name               = "cp-management"
+  name               = "${var.github_repository}-codepipeline-lambda"
   assume_role_policy = "${data.aws_iam_policy_document.lambda_assume.json}"
 }
 
@@ -135,7 +135,7 @@ resource "aws_iam_role_policy_attachment" "lambda" {
 }
 
 resource "aws_iam_policy" "lambda" {
-  name        = "codepipeline-pr-policy"
+  name        = "${var.github_repository}-codepipeline-lambda"
   path        = "/"
   description = "Allows Lambda to manage temporary CodePipeline projects for PR branches"
   policy      = "${data.aws_iam_policy_document.lambda_policy.json}"

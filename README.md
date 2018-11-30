@@ -16,8 +16,8 @@ AWS CodePipeline does not currently support catching arbitrary source branches; 
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| artifact_bucket | Name of an S3 bucket to store artifacts in. If not specified, one will be created. | string | `` | no |
-| artifact_bucket_kms_key | ARN of the artifact bucket's KMS key used for encryption. If not specified, one will be created. | string | - | yes |
+| artifact_bucket | Name of an S3 bucket to store artifacts in | string | - | yes |
+| artifact_bucket_kms_key | ARN of the artifact bucket's KMS key used for encryption | string | - | yes |
 | codebuild_compute_type | - | string | `BUILD_GENERAL1_SMALL` | no |
 | codebuild_image | - | string | `aws/codebuild/docker:17.09.0` | no |
 | codebuild_os | - | string | `LINUX_CONTAINER` | no |
@@ -26,8 +26,17 @@ AWS CodePipeline does not currently support catching arbitrary source branches; 
 | github_oauth_token_ssm_param | Name of AWS SSM Parameter that holds a GitHub OAuth token. Must be of type `SecureString` | string | - | yes |
 | github_organization | GitHub organization that owns the source repository | string | - | yes |
 | github_repository | GitHub source repository | string | - | yes |
-| iam_role_codebuild | ARN of an IAM role for CodeBuild to run as. If not specified, one will be created. | string | `` | no |
-| iam_role_codepipeline | ARN of an IAM role for CodePipeline to run as. If not specified, one will be created. | string | `` | no |
-| iam_role_lambda | ARN of an IAM role for Lambda to run as. If not specified, one will be created. | string | `` | no |
+| iam_role_codebuild | ARN of an IAM role for CodeBuild to run as | string | - | yes |
+| iam_role_codepipeline | ARN of an IAM role for CodePipeline to run as | string | - | yes |
+| lambda_memory | Memory limit (in MB) to allocate to the Lambda function | string | `256` | no |
+| lambda_timeout | Time limit (in seconds) for the Lambda function execution | string | `300` | no |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+## TODO
+  - Passthrough tags and tag resources
+  - Pre-Commit hook for compiling zip
+  - gitignore for binary
+  - Test deployment of whole module (examples directory)
+  - Terraform Registry
+  - Test to see if many-source -> one-build is even possible!

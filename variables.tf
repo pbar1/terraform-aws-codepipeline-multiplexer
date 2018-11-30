@@ -20,26 +20,37 @@ variable "github_oauth_token_ssm_param" {
 }
 
 #--------------------------------------------------------------------
+# API Gateway & Lambda
+#--------------------------------------------------------------------
+
+variable "lambda_timeout" {
+  description = "Time limit (in seconds) for the Lambda function execution"
+  default     = 300
+}
+
+variable "lambda_memory" {
+  description = "Memory limit (in MB) to allocate to the Lambda function"
+  default     = 256
+}
+
+#--------------------------------------------------------------------
 # CodePipeline & CodeBuild
 #--------------------------------------------------------------------
 
 variable "artifact_bucket" {
-  description = "Name of an S3 bucket to store artifacts in. If not specified, one will be created."
-  default     = ""
+  description = "Name of an S3 bucket to store artifacts in"
 }
 
 variable "artifact_bucket_kms_key" {
-  description = "ARN of the artifact bucket's KMS key used for encryption. If not specified, one will be created."
+  description = "ARN of the artifact bucket's KMS key used for encryption"
 }
 
 variable "iam_role_codepipeline" {
-  description = "ARN of an IAM role for CodePipeline to run as. If not specified, one will be created."
-  default     = ""
+  description = "ARN of an IAM role for CodePipeline to run as"
 }
 
 variable "iam_role_codebuild" {
-  description = "ARN of an IAM role for CodeBuild to run as. If not specified, one will be created."
-  default     = ""
+  description = "ARN of an IAM role for CodeBuild to run as"
 }
 
 variable "codebuild_image" {
@@ -56,13 +67,4 @@ variable "codebuild_os" {
 
 variable "codebuild_privileged_mode" {
   default = true
-}
-
-#--------------------------------------------------------------------
-# API Gateway & Lambda
-#--------------------------------------------------------------------
-
-variable "iam_role_lambda" {
-  description = "ARN of an IAM role for Lambda to run as. If not specified, one will be created."
-  default     = ""
 }
